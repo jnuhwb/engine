@@ -45,6 +45,20 @@ class PlatformViewIOS final : public PlatformView {
   void SetSemanticsEnabled(bool enabled) override;
 
  private:
+  /// Smart pointer for use with objective-c observers.
+  /// This guarentees we remove the observer.
+  class ScopedObserver {
+   public:
+    ScopedObserver();
+    ~ScopedObserver();
+    void reset(id<NSObject> observer);
+    ScopedObserver(const ScopedObserver&) = delete;
+    ScopedObserver& operator=(const ScopedObserver&) = delete;
+
+   private:
+    id<NSObject> observer_;
+  };
+
   fml::WeakPtr<FlutterViewController> owner_controller_;
   std::unique_ptr<IOSSurface> ios_surface_;
   std::shared_ptr<IOSGLContext> gl_context_;
@@ -52,6 +66,7 @@ class PlatformViewIOS final : public PlatformView {
   std::unique_ptr<AccessibilityBridge> accessibility_bridge_;
   fml::scoped_nsprotocol<FlutterTextInputPlugin*> text_input_plugin_;
   fml::closure firstFrameCallback_;
+  ScopedObserver dealloc_view_controller_observer_;
 
   // |PlatformView|
   void HandlePlatformMessage(fml::RefPtr<flutter::PlatformMessage> message) override;

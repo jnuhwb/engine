@@ -521,6 +521,9 @@ typedef enum UIAccessibilityContrast : NSInteger {
 }
 
 - (void)dealloc {
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"FlutterViewControllerWillDealloc"
+                                                      object:self
+                                                    userInfo:nil];
   [_engine.get() notifyViewControllerDeallocated];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [super dealloc];
