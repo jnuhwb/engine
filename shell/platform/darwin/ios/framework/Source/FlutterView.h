@@ -26,6 +26,8 @@
 
 @interface FlutterView : UIView
 
+@property(assign, nonatomic) id<FlutterViewEngineDelegate> delegate;
+
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;

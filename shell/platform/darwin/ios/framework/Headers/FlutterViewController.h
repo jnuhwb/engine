@@ -172,7 +172,7 @@ FLUTTER_EXPORT
 /**
  * The `FlutterEngine` instance for this view controller.
  */
-@property(weak, nonatomic, readonly) FlutterEngine* engine;
+@property(weak, nonatomic) FlutterEngine* engine;
 
 /**
  * The `FlutterBinaryMessenger` associated with this FlutterViewController (used for communicating

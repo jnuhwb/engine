@@ -151,6 +151,13 @@ typedef enum UIAccessibilityContrast : NSInteger {
   return _engine.get();
 }
 
+- (void)setEngine:(FlutterEngine *)engine {
+  if (_engine.get() != engine) {
+    _engine.reset([engine retain]);
+    _flutterView.get().delegate = _engine;
+  }
+}
+
 - (fml::WeakPtr<FlutterViewController>)getWeakPtr {
   return _weakFactory->GetWeakPtr();
 }

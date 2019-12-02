@@ -23,7 +23,7 @@
 
 @implementation FlutterView
 
-id<FlutterViewEngineDelegate> _delegate;
+
 
 - (instancetype)init {
   @throw([NSException exceptionWithName:@"FlutterView must initWithDelegate"
@@ -166,4 +166,7 @@ id<FlutterViewEngineDelegate> _delegate;
   CGContextRestoreGState(context);
 }
 
+- (void)setDelegate:(id<FlutterViewEngineDelegate>)delegate {
+  _delegate = delegate;
+}
 @end
